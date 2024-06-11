@@ -1,0 +1,143 @@
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 ">
+            <div class="card">
+                <div class="card-body text-center">
+                        <h3 class="titulo fw-bold">
+                            Sección 
+                        </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="row mt-4">
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="titulo">{{accion |uppercase}}</h5>
+                <form [formGroup]="formSeccion" (ngSubmit)="AddSeccion();" action="">
+                    
+                    
+      
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-database" 
+                                    [class.green-icon]="this.formSeccion.get('id')?.valid"
+                                    [class.red-icon]="this.formSeccion.get('id')?.invalid && this.formSeccion.get('id')?.touched"></i>
+                            </span>
+                            <input formControlName="id"  minlength="3"  id="disabledTextInput" maxlength="50" type="text" class="form-control" placeholder="id"  >
+                        </div>  
+                    
+                   <!-- <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-chalkboard-user"
+                            [class.green-icon]="this.formSeccion.get('idClase')?.valid"
+                            [class.red-icon]="this.formSeccion.get('idClase')?.invalid && this.formSeccion.get('idClase')?.touched"></i>
+                        </span>
+                        <input formControlName="idClase" maxlength="50" type="text" class="form-control" placeholder="idClase">
+                    </div>-->
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                          <i class="fa-solid fa-chalkboard-user"
+                             [class.green-icon]="this.formSeccion.get('idClase')?.valid"
+                             [class.red-icon]="this.formSeccion.get('idClase')?.invalid && this.formSeccion.get('idClase')?.touched"></i>
+                        </span>
+                        <select formControlName="idClase" class="form-control">
+                          <option value="">Seleccione una Clase</option>
+                          <option *ngFor="let clase of listaClases" [value]="clase.codigo">{{clase.nombre}}</option>
+                        </select>
+                      </div>
+
+ 
+                            <!-- <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-credit-card"
+                                        [class.green-icon]="this.formSeccion.get('idMaestro')?.valid"
+                                        [class.red-icon]="this.formSeccion.get('idMaestro')?.invalid && this.formSeccion.get('idMaestro')?.touched"></i>
+                                </span>
+                                <input formControlName="idMaestro" maxlength="50" type="text" class="form-control" placeholder="idMaestro">
+                              </div>-->
+
+                              <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                  <i class="fa-solid fa-credit-card"
+                                     [class.green-icon]="this.formSeccion.get('idMaestro')?.valid"
+                                     [class.red-icon]="this.formSeccion.get('idMaestro')?.invalid && this.formSeccion.get('idMaestro')?.touched"></i>
+                                </span>
+                                <select formControlName="idMaestro" class="form-control">
+                                  <option value="">Seleccione un Maestro</option>
+                                  <option *ngFor="let maestro of listaMaestros" [value]="maestro.id">{{maestro.nombre}}</option>
+                                </select>
+                              </div>
+
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-clock"
+                                    [class.green-icon]="this.formSeccion.get('hora')?.valid"
+                                    [class.red-icon]="this.formSeccion.get('hora')?.invalid && this.formSeccion.get('hora')?.touched"></i>
+                                </span>
+                                <input formControlName="hora" type="time" class="form-control" placeholder="hora de la clase">
+                              </div>
+
+
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-door-open"
+                                    [class.green-icon]="this.formSeccion.get('aula')?.valid"
+                                    [class.red-icon]="this.formSeccion.get('aula')?.invalid && this.formSeccion.get('aula')?.touched"></i>
+                                </span>
+                                <input formControlName="aula"  maxlength="50" type="text" class="form-control" placeholder="Aula donde se hara la clase">
+                            </div>
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-list-ol"
+                                    [class.green-icon]="this.formSeccion.get('cupos')?.valid"
+                                    [class.red-icon]="this.formSeccion.get('cupos')?.invalid && this.formSeccion.get('cupos')?.touched"></i>
+                                </span>
+                                <input formControlName="cupos"  maxlength="3" type="number" class="form-control" placeholder="Cupos">
+                              </div>
+                      <button   type="submit" class="btn btn-success btn-lg">
+                        <i class="fa-solid fa-database"></i>&nbsp; {{accion |uppercase}}</button>
+                      <!-- [disabled]="this.formSeccion.invalid" -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 ">
+        <div class="card border border-dark shadow p-3  rounded">
+            <div class="card-body">
+                <h5 class="titulo fw-bold">Lista Seccion</h5>
+                <table class="table table-bordered table-hover text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Id</th>
+                          <th scope="col">Clase</th>
+                          <th scope="col">Maestro</th>
+                          <th scope="col">Hora</th>
+                          <th scope="col">Aula</th>
+                          <th scope="col">Actualizar</th>
+                          <th scope="col">Eliminar</th>
+                        </tr>
+                      </thead>
+                    <tbody>
+                        <tr *ngFor="let seccion of listaSeccion; let i = index ">
+                            <td>{{seccion.id}}</td>
+                            <td>{{seccion.idClase}}</td>
+                            <td>{{seccion.idMaestro}}</td>
+                            <td>{{seccion.hora}}</td>                              
+                            <td>{{seccion.aula}}</td>
+                            <td><button type="button" class="btn btn-outline-primary"><i (click)="editarSeccion(seccion);" class="far fa-solid fa-pencil "></i></button></td>
+                            <td><button type="button" class="btn btn-outline-danger"  (click)="eliminarSeccion(seccion.id);"><i  class="far fa-solid fa-trash-can "></i></button></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
