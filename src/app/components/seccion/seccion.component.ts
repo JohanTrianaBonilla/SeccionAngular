@@ -67,12 +67,19 @@ listaMaestros: any[] = [];
         });
       }, 
       error: error => {
-        console.log("seccion -->", seccion);
-        Swal.fire({
-          title: "Error",
-          text: "Error al agrerar la seccón",
-          icon: "error"
-        });
+        if (error.status === 400) { // Conflicto
+          Swal.fire({
+            title: "¡Advertencia!",
+            text: "La sección que intenta añadir ya existe.",
+            icon: "warning"
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "Error al agregar la seccón",
+            icon: "error"
+          });
+        }
       }
       });
     }else {
